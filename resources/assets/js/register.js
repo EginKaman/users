@@ -10,7 +10,7 @@ $(document).ready(function () {
 			type: 'POST',
 			data: $(this).serialize(),
 			success: function (data) {
-				$('.alert.alert-dismissible').prepend(message).removeClass('invisible').addClass('alert-success');
+				$('.alert.alert-dismissible').prepend('Register success.').removeClass('invisible').addClass('alert-success');
 				this.form.reset();
 			},
 			error: function (data) {
