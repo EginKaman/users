@@ -5,6 +5,7 @@ namespace Users\Http\Controllers\Auth;
 use Users\User;
 use Users\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -84,8 +85,6 @@ class RegisterController extends Controller
 
 		event(new Registered($user = $this->create($request->all())));
 
-//		$this->guard()->login($user);
-
 		return $this->registered($request, $user);
 	}
 
@@ -99,7 +98,7 @@ class RegisterController extends Controller
 	 */
 	protected function registered(Request $request, $user)
 	{
-		//
+		return \response()->json(['message' => 'Register success.']);
 	}
 
 }

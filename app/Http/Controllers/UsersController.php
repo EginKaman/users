@@ -8,6 +8,8 @@
 
 namespace Users\Http\Controllers;
 
+use Users\User;
+use Users\Visitors;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,11 +50,11 @@ class UsersController extends Controller
 		if ($id == Auth::id()) {
 			return redirect('home');
 		}
-		$user = DB::table('users')->where('id', $id)->first();
+		$user = User::query()->where('id', $id)->first();
 		if (empty($user)) {
 			abort(404);
 		} else {
-			DB::table('visitors')->insert([
+			Visitors::query()->insert([
 				'id' => $id,
 				'guest_id' => Auth::id()
 			]);

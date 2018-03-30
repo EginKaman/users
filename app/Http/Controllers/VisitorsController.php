@@ -8,6 +8,7 @@
 
 namespace Users\Http\Controllers;
 
+use Users\Visitors;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +33,7 @@ class VisitorsController extends Controller
 	 */
 	public function index(Request $request)
 	{
-		$visitors = DB::table('visitors')
+		$visitors = Visitors::query()
 			->join('users', 'guest_id', '=', 'users.id')
 			->select('users.id', 'users.name', 'users.email', 'visitors.visited_at')
 			->where(['visitors.id' => Auth::id()])
