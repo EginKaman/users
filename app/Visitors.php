@@ -26,4 +26,13 @@ class Visitors extends Model
 	 * @var string
 	 */
 	const CREATED_AT = 'visited_at';
+
+	public static function insertVisitor($id, $guest_id)
+	{
+		return parent::query()->insert([
+			'id' => $id,
+			'guest_id' => $guest_id
+		]);
+	}
+
 }

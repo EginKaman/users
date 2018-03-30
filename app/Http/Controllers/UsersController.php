@@ -50,14 +50,11 @@ class UsersController extends Controller
 		if ($id == Auth::id()) {
 			return redirect('home');
 		}
-		$user = User::query()->where('id', $id)->first();
+		$user = User::getFirstUser($id);
 		if (empty($user)) {
 			abort(404);
 		} else {
-			Visitors::query()->insert([
-				'id' => $id,
-				'guest_id' => Auth::id()
-			]);
+			Visitors::insertVisitor($id, Auth::id());
 			return view('users.show', ['user' => $user]);
 		}
 
