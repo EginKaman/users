@@ -34,7 +34,7 @@ class UsersController extends Controller
 	 */
 	public function index(Request $request)
 	{
-		$users = DB::table('users')->paginate(15);
+		$users = User::paginate();
 		return view('users.list', ['users' => $users]);
 	}
 
@@ -54,7 +54,7 @@ class UsersController extends Controller
 		if (empty($user)) {
 			abort(404);
 		} else {
-			Visitors::insertVisitor($id, Auth::id());
+			Visitors::insert(['id' => $id, 'guest_id' => Auth::id()]);
 			return view('users.show', ['user' => $user]);
 		}
 

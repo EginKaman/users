@@ -27,12 +27,14 @@ class Visitors extends Model
 	 */
 	const CREATED_AT = 'visited_at';
 
-	public static function insertVisitor($id, $guest_id)
+	public static function getVisitors($id)
 	{
-		return parent::query()->insert([
-			'id' => $id,
-			'guest_id' => $guest_id
-		]);
+		$query = self::query()
+			->join('users', 'guest_id', '=', 'users.id')
+			->select('users.id', 'users.name', 'users.email', 'visitors.visited_at')
+			->where(['visitors.id' => $id])
+			->paginate(15);
+		return $query;
 	}
 
 }

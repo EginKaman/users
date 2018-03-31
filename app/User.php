@@ -27,9 +27,16 @@ class User extends Authenticatable
 		'password', 'remember_token',
 	];
 
+	/**
+	 * The number of models to return for pagination.
+	 *
+	 * @var int
+	 */
+	protected $perPage = 15;
+
 	public static function getFirstUser($id)
 	{
-		return parent::query()->where('id', $id)->first();
+		return self::where('id', $id)->first();
 	}
 
 }

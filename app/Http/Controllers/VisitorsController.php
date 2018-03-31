@@ -33,11 +33,7 @@ class VisitorsController extends Controller
 	 */
 	public function index(Request $request)
 	{
-		$visitors = Visitors::query()
-			->join('users', 'guest_id', '=', 'users.id')
-			->select('users.id', 'users.name', 'users.email', 'visitors.visited_at')
-			->where(['visitors.id' => Auth::id()])
-			->paginate(15);
+		$visitors = Visitors::getVisitors(Auth::id());
 		return view('visitors', ['visitors' => $visitors]);
 	}
 }
